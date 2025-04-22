@@ -13,26 +13,29 @@ public class AutowiredTest {
 
     @Test
     void autowiredOption() {
-        ApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
+        ApplicationContext ac = new AnnotationConfigApplicationContext(TestBean.class);
 
     }
 
 
-    static class TestConfig {
+    static class TestBean {
 
+        // 주입할 빈이 없으면 메소드를 호출하지 않는다.
         @Autowired(required = false)
-        public void setBean1(Member member) {
-            System.out.println("setBean1 = " + member);
+        public void setNoBean1(Member member) {
+            System.out.println("noBean1 = " + member);
         }
 
+        // 주입할 빈이 없으면 null을 반환
         @Autowired
-        public void setBean2(@Nullable Member member) {
-            System.out.println("setBean2 = " + member);
+        public void setNoBean2(@Nullable Member member) {
+            System.out.println("noBean2 = " + member);
         }
 
+        // java8에서 제공하는 Optional 값이 없으면 Optional.empty 반환한다.
         @Autowired
-        public void setBean3(Optional<Member> member) {
-            System.out.println("setBean3 = " + member);
+        public void setNoBean3(Optional<Member> member) {
+            System.out.println("noBean3 = " + member);
         }
     }
 }

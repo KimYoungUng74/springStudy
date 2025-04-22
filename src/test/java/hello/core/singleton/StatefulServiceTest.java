@@ -15,8 +15,11 @@ public class StatefulServiceTest {
         StatefulService statefulService1 = ac.getBean("statefulService", StatefulService.class);
         StatefulService statefulService2 = ac.getBean("statefulService", StatefulService.class);
 
+        // TreadA: A사용자 10000원 주문
         statefulService1.order("userA", 10000);
+        // TreadA: B사용자 20000원 주문
         statefulService2.order("userB", 20000);
+
         System.out.println("statefulService1 = " + statefulService1);
         System.out.println("statefulService1.getPrice() = " + statefulService1.getPrice());
         assertThat(statefulService1.getPrice()).isEqualTo(20000);
