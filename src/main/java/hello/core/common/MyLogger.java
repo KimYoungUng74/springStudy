@@ -9,7 +9,7 @@ import javax.annotation.PreDestroy;
 import java.util.UUID;
 
 @Component
-@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS) // proxyMode를 TARGET_CLASS로 하면
 public class MyLogger {
     private String uuid;
     private String requestURL;
@@ -26,11 +26,11 @@ public class MyLogger {
     @PostConstruct
     public void init() {
         uuid = UUID.randomUUID().toString();
-        System.out.println(String.format("[%s]request scope bean create:", uuid) + this);
+        System.out.println(String.format("[%s]request scope bean 생성:", uuid) + this);
     }
 
     @PreDestroy
     public void destroy() {
-        System.out.println(String.format("[%s]request scope bean close:", uuid) + this);
+        System.out.println(String.format("[%s]request scope bean 종료:", uuid) + this);
     }
 }
